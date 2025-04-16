@@ -1,0 +1,10 @@
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='nominatim.openstreetmap.org', port=443): Read timed out. (read timeout=1)")': /reverse?lat=-1.0&lon=-1.0&format=json&addressdetails=1
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
+INFO:root:This message will be logged to aika.log inside the Logs folder
