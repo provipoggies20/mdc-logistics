@@ -57,7 +57,7 @@ def initialize_driver():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--headless")
-    service = Service(r'\\GPSX1\C$\Users\ADMIN\Desktop\SYSTEM\MDC\chromedriver-win64\chromedriver-win64\chromedriver.exe')
+    service = Service(r'\\GPSX2\C$\Users\GPSX2\Desktop\SYSTEM\MDC\chromedriver-win64\chromedriver-win64\chromedriver.exe')
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
@@ -95,6 +95,8 @@ def create_table(connection):
                 address VARCHAR(255) NOT NULL,
                 cut_address VARCHAR(255) NOT NULL,
                 position_time DATETIME NOT NULL,
+                latitude VARCHAR(255) NOT NULL,
+                longitude VARCHAR(255) NOT NULL,
                 tag VARCHAR(255) NOT NULL,
                 specs TEXT NOT NULL, 
                 physical_status TEXT NOT NULL,
@@ -119,8 +121,8 @@ def create_table(connection):
     except Error as e:
         print_message(f"Error creating table: {e}")
 
-# Function to insert a model into the MySQL database
-def insert_model(connection, model_info, equipment_type, location, position_time):
+# Update the insert_model function to accept latitude and longitude
+def insert_model(connection, model_info, equipment_type, location, position_time, latitude, longitude):
     if connection is None or not connection.is_connected():
         print_message("Database connection is lost. Skipping update.")
         return False, "Failed"  # Indicate failure
@@ -129,15 +131,17 @@ def insert_model(connection, model_info, equipment_type, location, position_time
         cursor = connection.cursor()
 
         insert_query = '''
-        INSERT INTO komtrax (target_name, equipment_type, address, position_time)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO komtrax (target_name, equipment_type, address, position_time, latitude, longitude)
+        VALUES (%s, %s, %s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE
             equipment_type = VALUES(equipment_type),
             address = VALUES(address),
-            position_time = VALUES(position_time)
+            position_time = VALUES(position_time),
+            latitude = VALUES(latitude),
+            longitude = VALUES(longitude)
         '''
         
-        cursor.execute(insert_query, (model_info, equipment_type, location, position_time))
+        cursor.execute(insert_query, (model_info, equipment_type, location, position_time, latitude, longitude))
         connection.commit()
 
         # Check if the operation was an insert or an update
@@ -237,20 +241,31 @@ def scrape_models(driver):
     
     return models
 
-# Function to scrape locations from the webpage
-def scrape_locations(driver):
+# Function to scrape locations and coordinates from the webpage
+def scrape_locations_and_coordinates(driver):
     locations = []
+    coordinates = []
     try:
         items = driver.find_elements(By.XPATH, "//div[contains(@class, 'DataTable_Item')]")
         
         for item in items:
+            # Extract location
             location_elements = item.find_elements(By.XPATH, ".//div[contains(@class, 'DataTable_ValueText')]")
             if len(location_elements) > 15:
                 location = location_elements[15].text.strip()
                 if location and location != "-":
                     locations.append(location)
+
+                # Extract latitude and longitude from the next cell
+                lat_long_element = location_elements[16].text.strip()  # Assuming lat/long is in the next cell
+                if lat_long_element and lat_long_element != "-":
+                    lat, long = lat_long_element.split(" / ")  # Assuming the format is "lat / long"
+                    coordinates.append((lat, long))
+
     except Exception as e:
-        print_message(f"Error scraping locations: {e}")
+        print_message(f"Error scraping locations and coordinates: {e}")
+
+    return locations, coordinates
 
     return locations
 
@@ -410,23 +425,23 @@ def main():
             zoom_out(driver, zoom_level=0.25)  # Zoom out to 25%
             
             models = scrape_models(driver)
-            locations = scrape_locations(driver)
+            locations, coordinates = scrape_locations_and_coordinates(driver)
 
             # Scrape conversion datetime
             conversion = scrape_conversion(driver)
 
-            # Insert scraped models and locations into the database
-            for model, location, position_time in zip(models, locations, conversion):
+            # Insert scraped models, locations, and coordinates into the database
+            for model, location, (lat, long), position_time in zip(models, locations, coordinates, conversion):
                 # Determine the equipment type based on the model name
                 equipment_type = determine_equipment_type(model)
-                success, status = insert_model(connection, model, equipment_type, location, position_time)
+                success, status = insert_model(connection, model, equipment_type, location, position_time, lat, long)
                 if success:
                     print_message(f"{status} model '{model}' successfully.")
                 else:
                     print_message(f"Failed to process model '{model}'.")
 
-            print_message("Waiting for 2 minutes before the next scrape...")
-            time.sleep(120)  # Wait for 2 minutes before the next scrape
+        print_message("Waiting for 2 minutes before the next scrape...")
+        time.sleep(120)  # Wait for 2 minutes before the next scrape
 
     except KeyboardInterrupt:
         print_message("Scraping stopped by user.")

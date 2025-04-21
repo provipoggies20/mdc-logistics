@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import messagebox
 import os
 import platform
+import psutil  # Import psutil for process management
 
 # Load the image for the icon
 image_path = "Assets/MDC LOGO.png"
@@ -97,7 +98,7 @@ def on_clicked(icon, item):
     try:
         if str(item) == "AikaStart":
             if processes["Aika"] is None:
-                processes["Aika"] = subprocess.Popen(['python w', 'aika - 3final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes["Aika"] = subprocess.Popen(['pythonw', 'aika - 3final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("Aika started")
             else:
                 print("Aika is already running")
@@ -123,7 +124,7 @@ def on_clicked(icon, item):
                 print("Komtrax is not running")
         elif str(item) == "GeofenceStart":
             if processes["Geofence"] is None:
-                processes["Geofence"] = subprocess.Popen(['pythonw', 'geofence.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes["Geofence"] = subprocess.Popen(['pythonw', 'geofence - final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("Geofence started")
             else:
                 print("Geofence is already running")
@@ -142,6 +143,7 @@ def on_clicked(icon, item):
                     processes[key] = None
                     print(f"{key} stopped")
             stop_event.set()  # Signal the update loop to stop
+            kill_processes()  # Kill specified processes on exit
             icon.stop()
     except Exception as e:
         print(f"Error: {e}")
@@ -184,8 +186,19 @@ def on_closing():
                 processes[key] = None
                 print(f"{key} stopped")
         stop_event.set()  # Signal the update loop to stop
+        kill_processes()  # Kill specified processes on exit
         icon.stop()
         root.destroy()
+
+# Function to kill specific processes
+def kill_processes():
+    for process in psutil.process_iter(['name']):
+        try:
+            if process.info['name'] in ['Chromedriver', 'chrome.exe', 'python', 'Google Chrome']:
+                process.kill()
+                print(f"Killed process: {process.info['name']}")
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
 
 # Create the main tkinter window
 root = tk.Tk()

@@ -67,7 +67,7 @@ def initialize_driver():
     chrome_options.add_argument("--no-sandbox")  # Add this line for better compatibility
     chrome_options.add_argument("--start-maximized")  # Start maximized
     chrome_options.add_argument("--headless")  # No Browser
-    service = Service(r'\\GPSX1\C$\Users\ADMIN\Desktop\SYSTEM\MDC\chromedriver-win64\chromedriver-win64\chromedriver.exe')
+    service = Service(r'\\GPSX2\C$\Users\GPSX2\Desktop\SYSTEM\MDC\chromedriver-win64\chromedriver-win64\chromedriver.exe')
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
@@ -177,7 +177,7 @@ def determine_equipment_type(target_name):
         return "Selfloader"
     elif "BT" in target_name and "*" not in target_name:
         return "Boomtruck"
-    elif "AK " in target_name and "*" not in target_name:
+    elif "AK-" in target_name and "*" not in target_name:
         return "GPS Tracker"
     elif "CV" in target_name and "*" not in target_name:
         return "Closed Van"
@@ -403,17 +403,8 @@ def main():
         # Wait for the page to load after login
         print_message("Waiting for the page to load after login...")
 
-        # Set the page load timeout to 5 seconds
-        driver.set_page_load_timeout(5)
-
-        # Wait for 5 seconds
-        time.sleep(5)
-
-        # Execute JavaScript to stop loading the page
-        driver.execute_script("window.stop();")
-        print("Page loading stopped.")
-
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'pageShowFrame_Map')))  # Update with an element that appears after login
+        time.sleep(5)  # Wait for the page to load
+        driver.get("https://en.aika168.com")
         print_message("Login successful.")
 
         # Switch to the iframe again to scrape data
