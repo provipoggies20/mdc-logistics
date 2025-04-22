@@ -124,7 +124,7 @@ def on_clicked(icon, item):
                 print("Komtrax is not running")
         elif str(item) == "GeofenceStart":
             if processes["Geofence"] is None:
-                processes["Geofence"] = subprocess.Popen(['pythonw', 'geofence - final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes["Geofence"] = subprocess.Popen(['pythonw', 'geofence - 2final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("Geofence started")
             else:
                 print("Geofence is already running")
