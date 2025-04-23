@@ -101,7 +101,7 @@ def haversine(coord1, coord2):
     return R * c  # Distance in kilometers
 
 # Function to check if a point is within a geofence
-def is_within_geofence(device_location, geofence_coordinates, radius=3):  # Change radius to 3 km
+def is_within_geofence(device_location, geofence_coordinates, radius=5):  # Change radius to 5 km
     distance = haversine(device_location, geofence_coordinates)
     return distance <= radius
 
@@ -174,11 +174,9 @@ def main():
                 printed_lines += 1
                 continue
 
-            # Print the target name along with its site
             print(f"Processing device: {target_name} with address: {address}, Assignment: {assignment}")
             printed_lines += 1
 
-            # Use the latitude and longitude directly
             device_location = get_device_location(latitude, longitude)
 
             normalized_assignment = assignment.strip().lower().replace(" ", "")
@@ -198,6 +196,9 @@ def main():
 
                             # Process each coordinate and site
                             for coord in coordinates_data:
+                                if notification_deleted:  # Check if notification has already been deleted
+                                    break  # Stop processing further coordinates for this device
+
                                 # Extract latitude and longitude from the coordinates string
                                 try:
                                     lat, lon = map(float, coord[0].strip().split(','))
@@ -207,7 +208,8 @@ def main():
                                     # If coordinates are invalid, delete the notification and ignore
                                     delete_notification(connection, target_name)
                                     print(f"Deleted notification for {target_name} due to invalid coordinates.")
-                                    continue  # Skip invalid coordinates
+                                    notification_deleted = True  # Set the flag to True
+                                    break  # Stop processing further coordinates
 
                                 geofence_coordinates = (lat, lon)
 
@@ -217,6 +219,7 @@ def main():
                                         delete_notification(connection, target_name)  # Delete the notification
                                         notification_deleted = True  # Set the flag to True
                                         print(f"Deleted notification for {target_name} at {coord[1]}.")
+                                        break  # Stop processing further coordinates
                                 else:
                                     # If the device is outside the geofence, insert/update notification
                                     status = f"Outside Geofence - {address}, Site: {site}"
@@ -226,6 +229,8 @@ def main():
                                     if "Address not found" in address:
                                         delete_notification(connection, target_name)  # Delete the notification
                                         print(f"Deleted notification for {target_name} due to address not found.")
+                                        notification_deleted = True  # Set the flag to True
+                                        break  # Stop processing further coordinates
                         else:
                             print(f"No coordinates found for assignment table: {table_name}")
                             printed_lines += 1
@@ -238,76 +243,81 @@ def main():
                 print(f"No matching tables found for assignment: {assignment}")
                 printed_lines += 1
 
-        # Process devices from the komtrax table
-        for target_name, address, latitude, longitude, assignment in komtrax_devices:
-            if not assignment:
-                print(f"Skipping komtrax device {target_name} due to empty assignment.")
+            # Process devices from the devices table
+            for target_name, address, latitude, longitude, assignment in komtrax_devices:
+                if not assignment:
+                    print(f"Skipping device {target_name} due to empty assignment.")
+                    printed_lines += 1
+                    continue
+
+                print(f"Processing device: {target_name} with address: {address}, Assignment: {assignment}")
                 printed_lines += 1
-                continue
 
-            # Print the target name along with its site
-            print(f"Processing komtrax device: {target_name} with address: {address}, Assignment: {assignment}")
-            printed_lines += 1
+                device_location = get_device_location(latitude, longitude)
 
-            # Use the latitude and longitude directly
-            device_location = get_device_location(latitude, longitude)
+                normalized_assignment = assignment.strip().lower().replace(" ", "")
+                matching_tables = find_matching_tables(connection, normalized_assignment)
+                print(f"Found matching tables for assignment '{assignment}': {matching_tables}")
 
-            normalized_assignment = assignment.strip().lower().replace(" ", "")
-            matching_tables = find_matching_tables(connection, normalized_assignment)
-            print(f"Found matching tables for assignment '{assignment}': {matching_tables}")
+                if matching_tables:
+                    notification_deleted = False  # Flag to track if notification has been deleted
 
-            if matching_tables:
-                notification_deleted = False  # Flag to track if notification has been deleted
+                    for table_name in matching_tables:
+                        print(f"Accessing table: {table_name}")
+                        try:
+                            coordinates_data = get_coordinates_and_site_from_table(connection, table_name)
 
-                for table_name in matching_tables:
-                    print(f"Accessing table: {table_name}")
-                    try:
-                        coordinates_data = get_coordinates_and_site_from_table(connection, table_name)
+                            if coordinates_data:
+                                print(f"Retrieved coordinates from {table_name}: {coordinates_data}")
 
-                        if coordinates_data:
-                            print(f"Retrieved coordinates from {table_name}: {coordinates_data}")
+                                # Process each coordinate and site
+                                for coord in coordinates_data:
+                                    if notification_deleted:  # Check if notification has already been deleted
+                                        break  # Stop processing further coordinates for this device
 
-                            # Process each coordinate and site
-                            for coord in coordinates_data:
-                                # Extract latitude and longitude from the coordinates string
-                                try:
-                                    lat, lon = map(float, coord[0].strip().split(','))
-                                    site = coord[1]  # Get the site
-                                except ValueError:
-                                    print(f"Invalid coordinate format: {coord[0]}")
-                                    # If coordinates are invalid, delete the notification and ignore
-                                    delete_notification(connection, target_name)
-                                    print(f"Deleted notification for {target_name} due to invalid coordinates.")
-                                    continue  # Skip invalid coordinates
-
-                                geofence_coordinates = (lat, lon)
-
-                                # Use the device_location directly
-                                if is_within_geofence(device_location, geofence_coordinates):
-                                    if not notification_deleted:
-                                        delete_notification(connection, target_name)  # Delete the notification
+                                    # Extract latitude and longitude from the coordinates string
+                                    try:
+                                        lat, lon = map(float, coord[0].strip().split(','))
+                                        site = coord[1]  # Get the site
+                                    except ValueError:
+                                        print(f"Invalid coordinate format: {coord[0]}")
+                                        # If coordinates are invalid, delete the notification and ignore
+                                        delete_notification(connection, target_name)
+                                        print(f"Deleted notification for {target_name} due to invalid coordinates.")
                                         notification_deleted = True  # Set the flag to True
-                                        print(f"Deleted notification for {target_name} at {coord[1]}.")
-                                else:
-                                    # If the device is outside the geofence, insert/update notification
-                                    status = f"Outside Geofence - {address}, Site: {site}"
-                                    insert_or_update_notification(connection, target_name, status)
+                                        break  # Stop processing further coordinates
 
-                                    # Check if the address indicates "Address not found"
-                                    if "Address not found" in address:
-                                        delete_notification(connection, target_name)  # Delete the notification
-                                        print(f"Deleted notification for {target_name} due to address not found.")
-                        else:
-                            print(f"No coordinates found for assignment table: {table_name}")
+                                    geofence_coordinates = (lat, lon)
+
+                                    # Use the device_location directly
+                                    if is_within_geofence(device_location, geofence_coordinates):
+                                        if not notification_deleted:
+                                            delete_notification(connection, target_name)  # Delete the notification
+                                            notification_deleted = True  # Set the flag to True
+                                            print(f"Deleted notification for {target_name} at {coord[1]}.")
+                                            break  # Stop processing further coordinates
+                                    else:
+                                        # If the device is outside the geofence, insert/update notification
+                                        status = f"Outside Geofence - {address}, Site: {site}"
+                                        insert_or_update_notification(connection, target_name, status)
+
+                                        # Check if the address indicates "Address not found"
+                                        if "Address not found" in address:
+                                            delete_notification(connection, target_name)  # Delete the notification
+                                            print(f"Deleted notification for {target_name} due to address not found.")
+                                            notification_deleted = True  # Set the flag to True
+                                            break  # Stop processing further coordinates
+                            else:
+                                print(f"No coordinates found for assignment table: {table_name}")
+                                printed_lines += 1
+
+                        except Error as e:
+                            print(f"Error accessing table {table_name}: {e}")
                             printed_lines += 1
 
-                    except Error as e:
-                        print(f"Error accessing table {table_name}: {e}")
-                        printed_lines += 1
-
-            else:
-                print(f"No matching tables found for assignment: {assignment}")
-                printed_lines += 1
+                else:
+                    print(f"No matching tables found for assignment: {assignment}")
+                    printed_lines += 1
 
         if printed_lines >= 100:
             clear_console()
