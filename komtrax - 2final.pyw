@@ -440,8 +440,8 @@ def main():
                 else:
                     print_message(f"Failed to process model '{model}'.")
 
-        print_message("Waiting for 2 minutes before the next scrape...")
-        time.sleep(120)  # Wait for 2 minutes before the next scrape
+        print_message("Waiting for 10 minutes before the next scrape...")
+        time.sleep(600)  # Wait for 10 minutes before the next scrape
 
     except KeyboardInterrupt:
         print_message("Scraping stopped by user.")

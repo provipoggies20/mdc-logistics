@@ -55,7 +55,7 @@ def print_message(message):
 # Function to check internet connection
 def check_internet_connection():
     try:
-        requests.get("http://www.google.com", timeout=5)
+        requests.get("http://www.google.com", timeout=300)
         return True
     except requests.ConnectionError:
         return False
@@ -371,7 +371,7 @@ def main():
     connection = create_connection()
     create_table(connection)
 
-    url = 'https://en.aika168.com'  # Replace with the actual URL
+    url = 'https://en.aika168.com/index.aspx'  # Replace with the actual URL
 
     # Automated login
     driver.get(url)
@@ -403,8 +403,8 @@ def main():
         # Wait for the page to load after login
         print_message("Waiting for the page to load after login...")
 
-        time.sleep(5)  # Wait for the page to load
-        driver.get("https://en.aika168.com")
+        time.sleep(10)  # Wait for the page to load
+        driver.get("https://en.aika168.com/index.aspx")
         print_message("Login successful.")
 
         # Switch to the iframe again to scrape data
@@ -436,8 +436,8 @@ def main():
                 print_message("No records were processed.")
                 print_message(f"Ready for Scraping...")
 
-            # Wait for 60 seconds before the next scrape
-            time.sleep(60)
+            # Wait for 180 seconds before the next scrape
+            time.sleeps(600)
 
     except Exception as e:
         print_message(f"Error during login: {e}")
