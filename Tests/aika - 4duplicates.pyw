@@ -15,6 +15,7 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 from geopy.geocoders import Nominatim
 from datetime import datetime
 import logging
+from fuzzywuzzy import fuzz
 
 # Get the current directory of the script
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -222,7 +223,65 @@ def determine_equipment_type(target_name):
     # Add more conditions for other equipment types as needed
     return "Not Specified Yet"
 
-# Function to insert or update data in the MySQL database
+def create_duplicates_table(connection):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SHOW TABLES LIKE 'duplicates'")
+        result = cursor.fetchone()
+
+        if result:
+            print_message("Table 'duplicates' already exists.")
+        else:
+            create_table_query = '''
+            CREATE TABLE duplicates (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                target_name VARCHAR(255),
+                similar_name VARCHAR(255),
+                similarity FLOAT,
+                detected_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+            '''
+            cursor.execute(create_table_query)
+            connection.commit()
+            print_message("Table 'duplicates' created successfully.")
+    except Error as e:
+        print_message(f"Error creating duplicates table: {e}")
+
+# Function to check for lookalike duplicates
+def check_for_lookalikes(cursor, target_name):
+    cursor.execute("SELECT target_name FROM devices")
+    existing_names = [row[0] for row in cursor.fetchall()]
+    
+    for name in existing_names:
+        similarity = fuzz.ratio(target_name, name)
+        if similarity > 95:  # You can adjust the threshold as needed
+            print_message(f"Lookalike found: '{target_name}' is similar to '{name}' with a similarity of {similarity}%.")
+            return True
+    return False
+
+def insert_duplicate(cursor, target_name, similar_name, similarity):
+    insert_query = '''
+    INSERT INTO duplicates (target_name, similar_name, similarity)
+    VALUES (%s, %s, %s)
+    '''
+    parameters = (target_name, similar_name, similarity)
+    cursor.execute(insert_query, parameters)
+    print_message(f"Inserted duplicate: '{target_name}' is similar to '{similar_name}' with similarity {similarity}%.")
+
+def cleanup_duplicates(connection):
+    try:
+        cursor = connection.cursor()
+        delete_query = '''
+        DELETE FROM duplicates
+        WHERE target_name NOT IN (SELECT target_name FROM devices)
+        '''
+        cursor.execute(delete_query)
+        connection.commit()
+        print_message("Cleaned up duplicates that no longer exist in devices.")
+    except Error as e:
+        print_message(f"Error cleaning up duplicates: {e}")    
+    
+# Modify the insert_or_update_data function
 def insert_or_update_data(connection, device_data):
     global last_known_address
 
@@ -257,7 +316,7 @@ def insert_or_update_data(connection, device_data):
         # Determine equipment type based on target_name
         equipment_type = determine_equipment_type(device_data[0])
 
-                # Extract license_plate_no from target_name
+        # Extract license_plate_no from target_name
         if '-' in device_data[0]:
             license_plate_no = device_data[0].split('-')[1].strip()  # Get the part after the dash and whitespace
         else:
@@ -279,6 +338,7 @@ def insert_or_update_data(connection, device_data):
             days_no_gps = 0  # Set to 0 if there is no previous position time
 
         if exists:
+            # Update existing record
             insert_query = '''
             UPDATE devices SET
                 type = %s,
@@ -300,22 +360,23 @@ def insert_or_update_data(connection, device_data):
             # Ensure the number of parameters matches the placeholders
             parameters = [device_data[1], license_plate_no, device_data[2], device_data[4], device_data[5], device_data[6], device_data[7], device_data[8], device_data[9], device_data[10], address, cut_address, equipment_type, days_no_gps, device_data[0]]
             cursor.execute(insert_query, parameters)
-            print_message(f"Updated data for '{device_data[0]}' successfully.")
+            print_message(f"Updated record for {device_data[0]}.")
         else:
+            # Insert new record
             insert_query = '''
             INSERT INTO devices (target_name, type, license_plate_no, speed_limit, latitude, longitude, speed, direction, total_mileage, status, position_time, address, cut_address, equipment_type, days_no_gps)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             '''
-            # Ensure the number of parameters matches the placeholders
             parameters = [device_data[0], device_data[1], license_plate_no, device_data[2], device_data[4], device_data[5], device_data[6], device_data[7], device_data[8], device_data[9], device_data[10], address, cut_address, equipment_type, days_no_gps]
             cursor.execute(insert_query, parameters)
-            print_message(f"Inserted new data for '{device_data[0]}' successfully.")
+            print_message(f"Inserted new record for {device_data[0]}.")
 
-        connection.commit()
+        # Call cleanup function after insert/update
+        cleanup_duplicates(connection)
+
         return True  # Indicate success
-
     except Error as e:
-        print_message(f"Error inserting/updating data for '{device_data[0]}': {e}")
+        print_message(f"Error inserting/updating data: {e}")
         return False  # Indicate failure
 
 # Function to scrape data from the page
@@ -379,6 +440,7 @@ def main():
         driver = initialize_driver()
         connection = create_connection()
         create_table(connection)
+        create_duplicates_table(connection)
 
         url = 'https://en.aika168.com/index.aspx'  # Replace with the actual URL
 
