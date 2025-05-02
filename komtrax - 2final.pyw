@@ -12,6 +12,24 @@ from selenium.webdriver.common.by import By
 from mysql.connector import Error
 from datetime import datetime
 import logging
+import smtplib
+from email.mime.text import MIMEText
+
+# Function to send an email notification
+def send_email_notification(to_email, subject, message, smtp_server, smtp_port, smtp_user, smtp_password):
+    msg = MIMEText(message)
+    msg['From'] = smtp_user
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.sendmail(smtp_user, [to_email], msg.as_string())
+            print_message("Email sent successfully!")
+    except Exception as e:
+        print_message(f"Failed to send email: {e}")
 
 # Get the current directory of the script
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -352,6 +370,13 @@ def main():
 
     email_user = "maxiprodc.gps1@gmail.com"  # Replace with your email
     email_pass = "gosc bvup dtpq zpsv"  # Replace with your App Password
+
+    # Email configuration
+    TO_EMAIL = 'maxiprodc.gps1@gmail.com'  # Replace with your email address
+    SMTP_SERVER = 'smtp.gmail.com'  # Your SMTP server
+    SMTP_PORT = 587  # Common port for TLS
+    SMTP_USER = 'maxiprodc.gps1@gmail.com'  # Your email address
+    SMTP_PASSWORD = 'gosc bvup dtpq zpsv'  # Your email password
     
     login_to_komtrax(driver, email_user)
     print_message(f"Getting the Email Verification...")
@@ -415,33 +440,38 @@ def main():
     time.sleep(5)  # Wait for the next page to load after submitting the code
 
     # Continuous scraping loop
-    try:
         while True:  # Start an infinite loop for continuous scraping
-            # After successful login, scrape data
-            driver.get("https://cfm.komtrax.komatsu/c/fm/info?count=50")
-            time.sleep(5)  # Wait for the page to load
-            
-            # Set zoom after loading the page
-            zoom_out(driver, zoom_level=0.25)  # Zoom out to 25%
-            
-            models = scrape_models(driver)
-            locations, coordinates = scrape_locations_and_coordinates(driver)
+            try:
+                # After successful login, scrape data
+                driver.get("https://cfm.komtrax.komatsu/c/fm/info?count=50")
+                time.sleep(5)  # Wait for the page to load
+                
+                # Set zoom after loading the page
+                zoom_out(driver, zoom_level=0.25)  # Zoom out to 25%
+                
+                models = scrape_models(driver)
+                locations, coordinates = scrape_locations_and_coordinates(driver)
 
-            # Scrape conversion datetime
-            conversion = scrape_conversion(driver)
+                # Scrape conversion datetime
+                conversion = scrape_conversion(driver)
 
-            # Insert scraped models, locations, and coordinates into the database
-            for model, location, (lat, long), position_time in zip(models, locations, coordinates, conversion):
-                # Determine the equipment type based on the model name
-                equipment_type = determine_equipment_type(model)
-                success, status = insert_model(connection, model, equipment_type, location, position_time, lat, long)
-                if success:
-                    print_message(f"{status} model '{model}' successfully.")
-                else:
-                    print_message(f"Failed to process model '{model}'.")
+                # Insert scraped models, locations, and coordinates into the database
+                for model, location, (lat, long), position_time in zip(models, locations, coordinates, conversion):
+                    # Determine the equipment type based on the model name
+                    equipment_type = determine_equipment_type(model)
+                    success, status = insert_model(connection, model, equipment_type, location, position_time, lat, long)
+                    if success:
+                        print_message(f"{status} model '{model}' successfully.")
+                    else:
+                        print_message(f"Failed to process model '{model}'.")
 
-        print_message("Waiting for 10 minutes before the next scrape...")
-        time.sleep(600)  # Wait for 10 minutes before the next scrape
+                print_message("Waiting for 10 minutes before the next scrape...")
+                time.sleep(600)  # Wait for 10 minutes before the next scrape
+
+            except Exception as e:
+                print_message(f"Error during scraping: {e}")
+                send_email_notification(TO_EMAIL, "KOMTRAX Sraper - Error", str(e), SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)
+                print_message("Error notification sent via email.")
 
     except KeyboardInterrupt:
         print_message("Scraping stopped by user.")

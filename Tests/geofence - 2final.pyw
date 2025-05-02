@@ -4,8 +4,6 @@ import time
 import os
 import logging
 import math
-import smtplib
-from email.mime.text import MIMEText
 
 # Get the current directory of the script
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -43,22 +41,6 @@ def create_connection():
         print(f"Error: {e}")
         return None
 
-# Function to send an email notification
-def send_email_notification(to_email, subject, message, smtp_server, smtp_port, smtp_user, smtp_password):
-    msg = MIMEText(message)
-    msg['From'] = smtp_user
-    msg['To'] = to_email
-    msg['Subject'] = subject
-
-    try:
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.sendmail(smtp_user, [to_email], msg.as_string())
-            print("Email sent successfully!")
-    except Exception as e:
-        print(f"Failed to send email: {e}")
-
 # Function to create the notifications table if it doesn't exist
 def create_notifications_table(connection):
     cursor = connection.cursor()
@@ -66,7 +48,6 @@ def create_notifications_table(connection):
     CREATE TABLE IF NOT EXISTS geofence (
         id INT AUTO_INCREMENT PRIMARY KEY,
         target_name VARCHAR(255) NOT NULL,
-        assignment VARCHAR(255) NOT NULL,
         status VARCHAR(255) NOT NULL,
         timestamp DATETIME NOT NULL
     )
@@ -119,7 +100,7 @@ def is_within_geofence(device_location, geofence_coordinates, radius=5):  # Chan
     return distance <= radius
 
 # Function to insert or update a notification in the database
-def insert_or_update_notification(connection, target_name, assignment, status):
+def insert_or_update_notification(connection, target_name, status):
     cursor = connection.cursor()
     
     # Check if a notification for the target_name already exists
@@ -129,13 +110,13 @@ def insert_or_update_notification(connection, target_name, assignment, status):
 
     if count > 0:
         # Update the existing record
-        update_query = "UPDATE geofence SET status = %s, assignment = %s, timestamp = NOW() WHERE target_name = %s"
-        cursor.execute(update_query, (status, assignment, target_name))
+        update_query = "UPDATE geofence SET status = %s, timestamp = NOW() WHERE target_name = %s"
+        cursor.execute(        update_query, (status, target_name))
         print(f"Updated notification for {target_name}: {status}")
     else:
         # Insert a new record
-        insert_query = "INSERT INTO geofence (target_name, assignment, status, timestamp) VALUES (%s, %s, %s, NOW())"
-        cursor.execute(insert_query, (target_name, assignment, status))
+        insert_query = "INSERT INTO geofence (target_name, status, timestamp) VALUES (%s, %s, NOW())"
+        cursor.execute(insert_query, (target_name, status))
         print(f"Inserted notification for {target_name}: {status}")
 
     connection.commit()
@@ -184,13 +165,6 @@ def truncate_geofence_table(connection):
 # Main function to run the geofencing logic
 def main():
     printed_lines = 0  # Initialize printed lines counter
-
-    # Email configuration
-    TO_EMAIL = 'maxiprodc.gps1@gmail.com'  # Replace with your email address
-    SMTP_SERVER = 'smtp.gmail.com'  # Your SMTP server
-    SMTP_PORT = 587  # Common port for TLS
-    SMTP_USER = 'maxiprodc.gps1@gmail.com'  # Your email address
-    SMTP_PASSWORD = 'gosc bvup dtpq zpsv'  # Your email password
 
     while True:  # Infinite loop
         connection = create_connection()  # Create a new connection for each iteration
@@ -274,7 +248,7 @@ def main():
                                 else:
                                     # If the device is outside the geofence, insert/update notification
                                     status = f"Outside Geofence - {address}, Site: {site}"
-                                    insert_or_update_notification(connection, target_name, assignment, status)
+                                    insert_or_update_notification(connection, target_name, status)
 
                                     # Check if the address indicates "Address not found"
                                     if "Address not found" in address:
@@ -288,7 +262,6 @@ def main():
 
                     except Error as e:
                         print(f"Error accessing table {table_name}: {e}")
-                        send_email_notification(TO_EMAIL, "GEOFENCE - Error", str(e), SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)
                         printed_lines += 1
 
             else:

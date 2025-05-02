@@ -16,6 +16,8 @@ from geopy.geocoders import Nominatim
 from datetime import datetime
 import logging
 from fuzzywuzzy import fuzz
+import smtplib
+from email.mime.text import MIMEText
 
 # Get the current directory of the script
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -62,7 +64,7 @@ def check_internet_connection():
         return True
     except requests.ConnectionError:
         return False
-
+    
 # Function to initialize the WebDriver
 def initialize_driver():
     chrome_options = Options()
@@ -90,6 +92,22 @@ def create_connection():
     except Error as e:
         print_message(f"Error: {e}")
         return None
+
+# Function to send an email notification
+def send_email_notification(to_email, subject, message, smtp_server, smtp_port, smtp_user, smtp_password):
+    msg = MIMEText(message)
+    msg['From'] = smtp_user
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.sendmail(smtp_user, [to_email], msg.as_string())
+            print("Email sent successfully!")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
 
 # Function to create the devices table if it doesn't exist
 def create_table(connection):
@@ -432,6 +450,12 @@ def scrape_data(driver, url):
 
 # Main function to run the scraper
 def main():
+    # Define your SMS gateway details
+    TO_EMAIL = 'maxiprodc.gps1@gmail.com'  # Replace with your email address
+    SMTP_SERVER = 'smtp.gmail.com'  # Your SMTP server
+    SMTP_PORT = 587  # Common port for TLS
+    SMTP_USER = 'maxiprodc.gps1@gmail.com'  # Your email address
+    SMTP_PASSWORD = 'gosc bvup dtpq zpsv'  # Your email password
 
     while True:
         driver = initialize_driver()
@@ -444,10 +468,6 @@ def main():
         # Automated login
         try:
             driver.get(url)
-        except TimeoutException:
-            print_message("Page took too long to load. Retrying...")
-            driver.get(url)  # Retry loading the page
-        try:
             print_message("Waiting for iframe...")
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'ifm')))
             
@@ -474,7 +494,6 @@ def main():
 
             # Wait for the page to load after login
             print_message("Waiting for the page to load after login...")
-
             time.sleep(10)  # Wait for the page to load
             driver.get("https://en.aika168.com/index.aspx")
             print_message("Login successful.")
@@ -511,7 +530,7 @@ def main():
                 # Call cleanup function after insert/update
                 cleanup_duplicates(connection)
 
-                # Wait for 180 seconds before the next scrape
+                # Wait for 600 seconds before the next scrape
                 time.sleep(600)
 
         except requests.exceptions.HTTPError as e:
@@ -519,9 +538,11 @@ def main():
             continue  # Restart
 
         except Exception as e:
-            print_message(f"Error during login: {e}")
-            driver.quit()
-            return
+            error_message = f"An error occurred: {e}"
+            print_message(error_message)
+            send_email_notification(TO_EMAIL, "AIKA Scraper - Error Notification", error_message, SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD)
+            driver.quit()  # Ensure the driver is closed on error
+            break  # Exit the loop on error
 
     driver.quit()
     if connection.is_connected():

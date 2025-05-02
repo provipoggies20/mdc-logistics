@@ -10,6 +10,12 @@ import os
 import platform
 import psutil  # Import psutil for process management
 
+# Email configuration for notifications
+EMAIL_USER = 'maxiprodc.gps1@gmail.com'  # Replace with your email address
+EMAIL_PASS = 'gosc bvup dtpq zpsv'  # Replace with your email password
+SMTP_SERVER = 'smtp.gmail.com'  # Your SMTP server
+SMTP_PORT =  587  # Common port for TLS
+
 # Load the image for the icon
 image_path = "Assets/MDC LOGO.png"
 image = Image.open(image_path)
@@ -38,6 +44,25 @@ def create_image(status):
     
     return icon_image
 
+import smtplib
+from email.mime.text import MIMEText
+
+# Function to send an email notification
+def send_email_notification(to_email, subject, message, smtp_server, smtp_port, smtp_user, smtp_password):
+    msg = MIMEText(message)
+    msg['From'] = smtp_user
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.sendmail(smtp_user, [to_email], msg.as_string())
+            print("Email sent successfully!")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+        
 def update_icon(icon):
     """Update the system tray icon based on the status of all scripts."""
     running_aika = processes["Aika"] is not None and processes["Aika"].poll() is None
@@ -81,16 +106,29 @@ def open_log_file(process_name):
     log_file_name = f"{process_name.lower()}.log"  # Assuming log files are named like 'aika.log'
     log_file_path = os.path.join("Logs", log_file_name)  # Construct the full path to the log file
 
-    # Check if the log file exists before trying to open it
-    if os.path.exists(log_file_path):
-        if platform.system() == "Windows":
-            os.startfile(log_file_path)  # Open log file in default text editor
-        elif platform.system() == "Darwin":  # macOS
-            subprocess.call(["open", log_file_path])
-        else:  # Linux
-            subprocess.call(["xdg-open", log_file_path])
-    else:
-        print(f"Log file {log_file_path} does not exist.")
+    try:
+        # Check if the log file exists before trying to open it
+        if os.path.exists(log_file_path):
+            if platform.system() == "Windows":
+                os.startfile(log_file_path)  # Open log file in default text editor
+            elif platform.system() == "Darwin":  # macOS
+                subprocess.call(["open", log_file_path])
+            else:  # Linux
+                subprocess.call(["xdg-open", log_file_path])
+        else:
+            raise FileNotFoundError(f"Log file {log_file_path} does not exist.")
+    except Exception as e:
+        print(f"Error opening log file: {e}")
+        # Send an email notification about the error
+        send_email_notification(
+            to_email=EMAIL_USER,
+            subject='Error Opening Log File',
+            message=str(e),
+            smtp_server=SMTP_SERVER,
+            smtp_port=SMTP_PORT,
+            smtp_user=EMAIL_USER,
+            smtp_password=EMAIL_PASS
+        )
 
 def on_clicked(icon, item):
     """Handle menu item clicks."""
@@ -98,7 +136,7 @@ def on_clicked(icon, item):
     try:
         if str(item) == "AikaStart":
             if processes["Aika"] is None:
-                processes["Aika"] = subprocess.Popen(['pythonw', 'aika - 3final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes["Aika"] = subprocess.Popen(['pythonw', 'aika - 4final.pyw'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 print("Aika started")
             else:
                 print("Aika is already running")
@@ -147,6 +185,16 @@ def on_clicked(icon, item):
             icon.stop()
     except Exception as e:
         print(f"Error: {e}")
+        # Send an email notification about the error
+        send_email_notification(
+            to_email='maxiprodc.gps1@gmail.com' ,  # Replace with your email address
+            subject='Error in SYSTEM MANAGER',
+            message=str(e),
+            smtp_server='smtp.gmail.com',  # Your SMTP server
+            smtp_port=587,  # Common port for TLS
+            smtp_user='maxiprodc.gps1@gmail.com',  # Your email address
+            smtp_password='gosc bvup dtpq zpsv'  # Your email password
+        )
 
 def update_status_labels():
     """Update the status labels for each process."""
