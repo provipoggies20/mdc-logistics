@@ -100,7 +100,7 @@ def main():
         for table in table_names:
             print(f"- {table}")
 
-        # Manual input for table selection
+        # Manual input for table selections
         selected_table = input("Enter the name of the table you want to use: ")
 
         if selected_table not in table_names:

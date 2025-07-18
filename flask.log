@@ -1,0 +1,276 @@
+2025-06-08 17:11:23,295 INFO: Database connection pool initialized successfully
+2025-06-08 17:11:23,299 INFO: Use pytorch device_name: cpu
+2025-06-08 17:11:23,300 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 17:11:23,308 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 17:11:23,990 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 17:11:24,399 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 17:11:24,809 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 17:11:25,218 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 17:11:25,628 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 17:11:26,038 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 17:11:26,447 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 17:11:28,501 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 17:11:28,796 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 17:11:29,196 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 17:11:29,542 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 17:11:29,549 INFO: SentenceTransformer model loaded successfully
+2025-06-08 17:11:30,663 INFO: Spacy model loaded successfully
+2025-06-08 17:11:30,666 INFO: Starting Flask server
+2025-06-08 17:11:30,678 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 17:11:30,678 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 17:40:50,652 ERROR: Error in /chat endpoint: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-06-08 17:40:50,653 INFO: 127.0.0.1 - - [08/Jun/2025 17:40:50] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-06-08 17:50:25,856 INFO: Database connection pool initialized successfully
+2025-06-08 17:50:25,862 INFO: Use pytorch device_name: cpu
+2025-06-08 17:50:25,862 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 17:50:25,873 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 17:50:26,285 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 17:50:26,736 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 17:50:27,038 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 17:50:27,807 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 17:50:28,599 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 17:50:29,374 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 17:50:29,662 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 17:50:31,916 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 17:50:32,205 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 17:50:32,585 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 17:50:32,890 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 17:50:32,893 INFO: SentenceTransformer model loaded successfully
+2025-06-08 17:50:34,082 INFO: Spacy model loaded successfully
+2025-06-08 17:50:34,088 INFO: Starting Flask server
+2025-06-08 17:50:34,101 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 17:50:34,101 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 17:50:42,704 DEBUG: Raw request data: {"message":"test","session_id":"test"}
+2025-06-08 17:50:42,704 INFO: Received message: test, session_id: test
+2025-06-08 17:50:46,754 ERROR: Error in /chat endpoint: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-06-08 17:50:46,755 INFO: 127.0.0.1 - - [08/Jun/2025 17:50:46] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-06-08 17:51:58,994 DEBUG: Raw request data: {"message":"What is the status of PC200-10M0?","session_id":"test"}
+2025-06-08 17:51:58,994 INFO: Received message: What is the status of PC200-10M0?, session_id: test
+2025-06-08 17:52:03,042 ERROR: Error in /chat endpoint: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+2025-06-08 17:52:03,042 INFO: 127.0.0.1 - - [08/Jun/2025 17:52:03] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-06-08 18:04:07,436 INFO: Database connection pool initialized successfully
+2025-06-08 18:04:07,443 INFO: Use pytorch device_name: cpu
+2025-06-08 18:04:07,443 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 18:04:07,456 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 18:04:08,414 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 18:04:08,940 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 18:04:09,238 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 18:04:09,528 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 18:04:09,830 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 18:04:10,161 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 18:04:10,457 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 18:04:13,831 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 18:04:14,284 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 18:04:14,655 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 18:04:14,972 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 18:04:14,976 INFO: SentenceTransformer model loaded successfully
+2025-06-08 18:04:16,268 INFO: Spacy model loaded successfully
+2025-06-08 18:04:16,273 INFO: Starting Flask server
+2025-06-08 18:04:16,286 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 18:04:16,286 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 19:46:36,186 INFO: Database connection pool initialized successfully
+2025-06-08 19:46:36,190 INFO: Use pytorch device_name: cpu
+2025-06-08 19:46:36,190 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 19:46:36,204 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 19:46:37,118 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 19:46:37,733 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 19:46:38,159 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 19:46:38,755 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 19:46:39,370 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 19:46:39,765 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 19:46:40,104 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 19:46:50,657 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 19:46:51,044 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 19:46:51,659 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 19:46:52,037 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 19:46:52,043 INFO: SentenceTransformer model loaded successfully
+2025-06-08 19:46:53,634 INFO: Spacy model loaded successfully
+2025-06-08 19:46:53,638 INFO: Starting Flask server
+2025-06-08 19:46:54,602 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 19:46:54,602 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 19:47:24,866 DEBUG: Raw request data: {"message":"test","session_id":"test"}
+2025-06-08 19:47:24,867 INFO: Received message: test, session_id: test
+2025-06-08 19:47:24,867 WARNING: Spacy or matcher not available, skipping entity extraction
+2025-06-08 19:47:25,299 INFO: Extracted intent: general_query, entities: {'vehicle': None, 'location': None}
+2025-06-08 19:47:25,300 ERROR: XAI_API_KEY not set in environment variables
+2025-06-08 19:47:25,301 INFO: 127.0.0.1 - - [08/Jun/2025 19:47:25] "POST /chat HTTP/1.1" 200 -
+2025-06-08 20:13:28,170 INFO: Loaded environment variables: sk-65746fcb6922479892ac1f8e7c244325, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:13:28,196 INFO: Database connection pool initialized successfully
+2025-06-08 20:13:28,199 INFO: Use pytorch device_name: cpu
+2025-06-08 20:13:28,200 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:13:28,209 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:13:28,737 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:13:29,100 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:13:29,502 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:13:29,912 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:13:30,211 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:13:30,706 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:13:31,140 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:13:33,598 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:13:33,908 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:13:34,320 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:13:34,657 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:13:34,661 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:13:35,747 INFO: Spacy model loaded successfully
+2025-06-08 20:13:35,751 INFO: Starting Flask server
+2025-06-08 20:13:36,623 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:13:36,623 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 20:15:24,468 DEBUG: Raw request data: {"message":"test","session_id":"test"}
+2025-06-08 20:15:24,468 INFO: Received message: test, session_id: test
+2025-06-08 20:15:24,468 WARNING: Spacy or matcher not available, skipping entity extraction
+2025-06-08 20:15:24,964 INFO: Extracted intent: general_query, entities: {'vehicle': None, 'location': None}
+2025-06-08 20:15:24,967 DEBUG: Starting new HTTPS connection (1): api.x.ai:443
+2025-06-08 20:15:25,876 DEBUG: https://api.x.ai:443 "POST /v1/chat/completions HTTP/1.1" 400 147
+2025-06-08 20:15:25,876 ERROR: DeepSeek API error: 400 Client Error: Bad Request for url: https://api.x.ai/v1/chat/completions
+2025-06-08 20:15:25,877 INFO: 127.0.0.1 - - [08/Jun/2025 20:15:25] "POST /chat HTTP/1.1" 200 -
+2025-06-08 20:20:56,566 INFO: Loaded environment variables: DEEPSEEK_API_KEY=********, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:20:56,590 INFO: Database connection pool initialized successfully
+2025-06-08 20:20:56,594 INFO: Use pytorch device_name: cpu
+2025-06-08 20:20:56,594 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:20:56,598 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:20:57,194 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:20:57,603 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:20:58,013 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:20:58,422 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:20:58,832 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:20:59,242 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:20:59,652 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:21:02,135 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:21:02,457 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:21:02,831 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:21:03,211 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:21:03,217 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:21:04,083 INFO: Spacy model loaded successfully
+2025-06-08 20:21:04,087 INFO: Starting Flask server
+2025-06-08 20:21:04,951 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:21:04,951 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 20:21:13,559 DEBUG: Raw request data: {"message":"test","session_id":"test"}
+2025-06-08 20:21:13,559 INFO: Received message: test, session_id: test
+2025-06-08 20:21:13,559 WARNING: Spacy or matcher not available, skipping entity extraction
+2025-06-08 20:21:13,810 INFO: Extracted intent: general_query, entities: {'vehicle': None, 'location': None}
+2025-06-08 20:21:13,813 DEBUG: Starting new HTTPS connection (1): api.x.ai:443
+2025-06-08 20:21:14,379 DEBUG: https://api.x.ai:443 "POST /v1/chat/completions HTTP/1.1" 400 147
+2025-06-08 20:21:14,380 ERROR: DeepSeek API HTTP error: 400 Client Error: Bad Request for url: https://api.x.ai/v1/chat/completions, Response: No response
+2025-06-08 20:21:14,382 INFO: 127.0.0.1 - - [08/Jun/2025 20:21:14] "POST /chat HTTP/1.1" 200 -
+2025-06-08 20:24:48,660 INFO: Loaded environment variables: DEEPSEEK_API_KEY=********, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:24:48,687 INFO: Database connection pool initialized successfully
+2025-06-08 20:24:48,692 INFO: Use pytorch device_name: cpu
+2025-06-08 20:24:48,692 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:24:48,697 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:24:49,222 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:24:49,542 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:24:49,869 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:24:50,201 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:24:50,517 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:24:50,832 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:24:51,182 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:24:53,396 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:24:53,727 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:24:54,119 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:24:54,471 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:24:54,474 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:24:55,385 INFO: Spacy model loaded successfully
+2025-06-08 20:24:55,389 INFO: Starting Flask server
+2025-06-08 20:24:56,246 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:24:56,247 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 20:26:52,733 INFO: Loaded environment variables: DEEPSEEK_API_KEY=********, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:26:52,756 INFO: Database connection pool initialized successfully
+2025-06-08 20:26:52,760 INFO: Use pytorch device_name: cpu
+2025-06-08 20:26:52,760 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:26:52,764 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:26:53,874 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:26:55,867 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:26:56,416 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:26:56,824 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:26:58,257 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:26:58,664 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:26:58,990 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:27:01,117 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:27:01,439 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:27:02,334 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:27:02,657 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:27:02,663 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:27:03,597 INFO: Spacy model loaded successfully
+2025-06-08 20:27:03,602 INFO: Starting Flask server
+2025-06-08 20:27:04,459 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:27:04,460 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 20:27:15,786 DEBUG: Raw request data: {"message":"test","session_id":"test"}
+2025-06-08 20:27:15,786 INFO: Received message: test, session_id: test
+2025-06-08 20:27:15,786 WARNING: Spacy or matcher not available, skipping entity extraction
+2025-06-08 20:27:15,984 INFO: Extracted intent: general_query, entities: {'vehicle': None, 'location': None}
+2025-06-08 20:27:15,986 DEBUG: Starting new HTTPS connection (1): api.deepseek.com:443
+2025-06-08 20:27:16,601 DEBUG: https://api.deepseek.com:443 "POST /v1/chat/completions HTTP/1.1" 402 111
+2025-06-08 20:27:16,602 ERROR: DeepSeek API HTTP error: 402 Client Error: Payment Required for url: https://api.deepseek.com/v1/chat/completions, Response: No response
+2025-06-08 20:27:16,603 INFO: 127.0.0.1 - - [08/Jun/2025 20:27:16] "POST /chat HTTP/1.1" 200 -
+2025-06-08 20:45:53,736 INFO: Loaded environment variables: DEEPSEEK_API_KEY=********, LILYPAD_API_KEY=********, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:45:53,766 INFO: Database connection pool initialized successfully
+2025-06-08 20:45:53,770 INFO: Use pytorch device_name: cpu
+2025-06-08 20:45:53,770 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:45:53,774 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:45:54,490 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:45:54,790 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:45:55,306 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:45:55,722 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:45:56,018 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:45:56,322 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:45:56,692 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:46:00,832 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:46:01,131 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:46:01,708 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:46:02,058 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:46:02,066 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:46:03,544 INFO: Spacy model loaded successfully
+2025-06-08 20:46:03,552 INFO: Starting Flask server
+2025-06-08 20:46:04,442 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:46:04,443 INFO: [33mPress CTRL+C to quit[0m
+2025-06-08 20:48:16,342 INFO: Loaded environment variables: DEEPSEEK_API_KEY=********, LILYPAD_API_KEY=********, DB_HOST=localhost, DB_USER=joshuagarcia
+2025-06-08 20:48:16,373 INFO: Database connection pool initialized successfully
+2025-06-08 20:48:16,377 INFO: Use pytorch device_name: cpu
+2025-06-08 20:48:16,377 INFO: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-06-08 20:48:16,384 DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-06-08 20:48:17,433 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:48:18,461 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-06-08 20:48:19,276 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+2025-06-08 20:48:19,692 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+2025-06-08 20:48:20,198 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+2025-06-08 20:48:20,712 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-06-08 20:48:21,032 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-08 20:48:24,608 DEBUG: https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-06-08 20:48:25,217 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-08 20:48:25,833 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6805
+2025-06-08 20:48:26,250 DEBUG: https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6805
+2025-06-08 20:48:26,259 INFO: SentenceTransformer model loaded successfully
+2025-06-08 20:48:27,823 INFO: Spacy model loaded successfully
+2025-06-08 20:48:27,826 INFO: Starting Flask server
+2025-06-08 20:48:28,709 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-06-08 20:48:28,709 INFO: [33mPress CTRL+C to quit[0m

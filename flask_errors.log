@@ -1,0 +1,170 @@
+2025-05-25 19:36:01,728 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:36:01,802 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:36:01,802 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:40:47,339 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:40:47,357 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:40:47,358 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:44:12,263 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:44:12,282 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:44:12,283 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:44:54,501 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:44:54,603 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:44:54,603 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:45:02,868 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:45:02,903 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:45:02,903 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:46:52,386 - INFO - Starting Flask server on http://0.0.0.0:5000
+2025-05-25 19:46:52,407 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:46:52,407 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:49:00,312 - INFO - Attempting to start Flask server on http://0.0.0.0:5000
+2025-05-25 19:49:00,332 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-25 19:49:00,332 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-25 19:49:07,915 - INFO - Received request: message='How many vehicles are due for PMS?', vehicle_data={'totalVehicles': 258, 'activeVehicles': 254, 'inactiveVehicles': 3, 'breakdownVehicles': 1, 'dueVehiclesCount': 4}
+2025-05-25 19:49:08,054 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 19:49:08,069 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 19:49:38,279 - ERROR - API request failed: HTTPSConnectionPool(host='anura-testnet.lilypad.tech', port=443): Read timed out. (read timeout=30)
+2025-05-25 19:49:38,279 - INFO - Fallback response due to API failure: Based on the dashboard data, there are 4 vehicles due or nearing PMS.
+2025-05-25 19:49:38,281 - INFO - 127.0.0.1 - - [25/May/2025 19:49:38] "POST /chat HTTP/1.1" 200 -
+2025-05-25 19:51:31,071 - INFO - Received request: message='how many vehicles are due for pms', vehicle_data={'totalVehicles': '3', 'activeVehicles': '1', 'inactiveVehicles': '1', 'breakdownVehicles': '1', 'dueVehiclesCount': 4}
+2025-05-25 19:51:31,119 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 19:51:31,120 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 19:52:01,264 - ERROR - API request failed: HTTPSConnectionPool(host='anura-testnet.lilypad.tech', port=443): Read timed out. (read timeout=30)
+2025-05-25 19:52:01,265 - INFO - Fallback response due to API failure: Based on the dashboard data, there are 4 vehicles due or nearing PMS.
+2025-05-25 19:52:01,267 - INFO - 127.0.0.1 - - [25/May/2025 19:52:01] "POST /chat HTTP/1.1" 200 -
+2025-05-25 19:52:18,710 - INFO - Received request: message='can you access other php files or just this file?', vehicle_data={'totalVehicles': '3', 'activeVehicles': '1', 'inactiveVehicles': '1', 'breakdownVehicles': '1', 'dueVehiclesCount': 4}
+2025-05-25 19:52:18,797 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 19:52:18,797 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 19:52:48,956 - ERROR - API request failed: HTTPSConnectionPool(host='anura-testnet.lilypad.tech', port=443): Read timed out. (read timeout=30)
+2025-05-25 19:52:48,957 - INFO - Fallback response due to API failure: Sorry, I couldn't connect to the AI service. Please try a specific question about vehicle stats (e.g., total vehicles, PMS due).
+2025-05-25 19:52:48,958 - INFO - 127.0.0.1 - - [25/May/2025 19:52:48] "POST /chat HTTP/1.1" 200 -
+2025-05-25 19:53:20,971 - INFO - Received request: message='can you give me a list of due to pms vehicles?', vehicle_data={'totalVehicles': '3', 'activeVehicles': '1', 'inactiveVehicles': '1', 'breakdownVehicles': '1', 'dueVehiclesCount': 4}
+2025-05-25 19:53:21,061 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 19:53:21,062 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 19:53:51,276 - ERROR - API request failed: HTTPSConnectionPool(host='anura-testnet.lilypad.tech', port=443): Read timed out. (read timeout=30)
+2025-05-25 19:53:51,276 - INFO - Fallback response due to API failure: Based on the dashboard data, there are 4 vehicles due or nearing PMS.
+2025-05-25 19:53:51,278 - INFO - 127.0.0.1 - - [25/May/2025 19:53:51] "POST /chat HTTP/1.1" 200 -
+2025-05-25 20:07:56,669 - INFO - Received request: message='how many vehicles are due for pms', vehicle_data={'totalVehicles': '3', 'activeVehicles': '1', 'inactiveVehicles': '1', 'breakdownVehicles': '1', 'dueVehiclesCount': 4}
+2025-05-25 20:07:56,798 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 20:07:56,798 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 20:08:16,190 - INFO - API response received: {'id': 'jobId-QmW5kYY23L8BcpAwSSRXY1EksCUTBU6R9f6GNvv7kEQTQj-jobState-ResultsSubmitted', 'object': 'chat.completion', 'created': 1748174896, 'model': 'llama3.1:8b', 'system_fingerprint': '', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': 'According to our current stats, there are **4** vehicles that are either due or nearing their Preventive Maintenance Schedule (PMS).'}, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 101, 'completion_tokens': 28, 'total_tokens': 129}}
+2025-05-25 20:08:16,190 - INFO - Successful response: According to our current stats, there are **4** vehicles that are either due or nearing their Preventive Maintenance Schedule (PMS).
+2025-05-25 20:08:16,192 - INFO - 127.0.0.1 - - [25/May/2025 20:08:16] "POST /chat HTTP/1.1" 200 -
+2025-05-25 20:09:09,531 - INFO - Received request: message='what are those 4 vehicles', vehicle_data={'totalVehicles': '3', 'activeVehicles': '1', 'inactiveVehicles': '1', 'breakdownVehicles': '1', 'dueVehiclesCount': 4}
+2025-05-25 20:09:12,711 - INFO - Network connectivity to anura-testnet.lilypad.tech:443 confirmed
+2025-05-25 20:09:12,711 - INFO - Sending request to https://anura-testnet.lilypad.tech/api/v1/chat/completions
+2025-05-25 20:09:42,939 - ERROR - API request failed: HTTPSConnectionPool(host='anura-testnet.lilypad.tech', port=443): Read timed out. (read timeout=30)
+2025-05-25 20:09:42,939 - INFO - Fallback response due to API failure: Sorry, I couldn't connect to the AI service. Please try a specific question about vehicle stats (e.g., total vehicles, PMS due).
+2025-05-25 20:09:42,940 - INFO - 127.0.0.1 - - [25/May/2025 20:09:42] "POST /chat HTTP/1.1" 200 -
+2025-05-26 08:14:02,595 - INFO - Starting Flask on port 5000
+2025-05-26 08:14:03,067 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.165:5000
+2025-05-26 08:14:03,067 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-26 08:47:13,773 - INFO - Starting Flask on port 5000
+2025-05-26 08:47:13,783 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.165:5000
+2025-05-26 08:47:13,783 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-26 08:49:01,999 - INFO - Received request: message='do you have access to my mdc database?', session_id='default'
+2025-05-26 08:49:11,128 - INFO - 127.0.0.1 - - [26/May/2025 08:49:11] "POST /chat HTTP/1.1" 200 -
+2025-05-26 08:49:31,040 - INFO - Received request: message='how many vehicles are due to pms', session_id='default'
+2025-05-26 08:49:31,044 - INFO - 127.0.0.1 - - [26/May/2025 08:49:31] "POST /chat HTTP/1.1" 200 -
+2025-05-26 08:49:54,671 - INFO - Received request: message='how many vehicles contract expired', session_id='default'
+2025-05-26 08:49:57,287 - INFO - 127.0.0.1 - - [26/May/2025 08:49:57] "POST /chat HTTP/1.1" 200 -
+2025-05-26 08:50:06,769 - INFO - Received request: message='how many vehicles contract expired?', session_id='default'
+2025-05-26 08:50:09,211 - INFO - 127.0.0.1 - - [26/May/2025 08:50:09] "POST /chat HTTP/1.1" 200 -
+2025-05-26 08:50:21,936 - INFO - Received request: message='how many vehicles are due to maintenance?', session_id='default'
+2025-05-26 08:50:24,442 - INFO - 127.0.0.1 - - [26/May/2025 08:50:24] "POST /chat HTTP/1.1" 200 -
+2025-05-26 18:42:51,934 - INFO - Starting Flask on port 5000
+2025-05-26 18:42:51,972 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-26 18:42:51,972 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-26 18:43:02,082 - INFO - Received request: message='how many vehicles have breakdown status', session_id='default'
+2025-05-26 18:43:35,155 - INFO - 127.0.0.1 - - [26/May/2025 18:43:35] "POST /chat HTTP/1.1" 200 -
+2025-05-27 19:42:18,268 - INFO - Starting Flask on port 5000
+2025-05-27 19:42:18,297 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-27 19:42:18,297 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 19:43:07,958 - INFO - Received request: message='what ai model are you', session_id='default'
+2025-05-27 19:43:13,125 - INFO - 127.0.0.1 - - [27/May/2025 19:43:13] "POST /chat HTTP/1.1" 200 -
+2025-05-27 19:44:08,141 - INFO - Received request: message='how many vehicles has overdue contracts', session_id='default'
+2025-05-27 19:44:15,641 - INFO - 127.0.0.1 - - [27/May/2025 19:44:15] "POST /chat HTTP/1.1" 200 -
+2025-05-27 19:51:31,241 - INFO - Starting Flask on port 5000
+2025-05-27 19:51:31,272 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-27 19:51:31,273 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 19:52:04,393 - INFO - Received request: message='what is your ai model', session_id='default'
+2025-05-27 19:52:08,532 - INFO - 127.0.0.1 - - [27/May/2025 19:52:08] "POST /chat HTTP/1.1" 200 -
+2025-05-27 19:52:30,586 - INFO - Received request: message='due for pms', session_id='default'
+2025-05-27 19:52:30,592 - INFO - 127.0.0.1 - - [27/May/2025 19:52:30] "POST /chat HTTP/1.1" 200 -
+2025-05-27 19:52:39,838 - INFO - Received request: message='overdue contracts', session_id='default'
+2025-05-27 19:53:06,846 - INFO - 127.0.0.1 - - [27/May/2025 19:53:06] "POST /chat HTTP/1.1" 200 -
+2025-05-28 21:11:52,626 - INFO - Starting Flask on port 5000
+2025-05-28 21:11:52,677 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-28 21:11:52,678 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-28 21:12:18,036 - INFO - Received request: message='what can you do', session_id='default'
+2025-05-28 21:12:23,724 - INFO - 127.0.0.1 - - [28/May/2025 21:12:23] "POST /chat HTTP/1.1" 200 -
+2025-05-28 21:28:30,302 - ERROR - Failed to load spacy model: [E050] Can't find model 'en_core_web_sm'. It doesn't seem to be a Python package or a valid path to a data directory.
+2025-05-28 21:28:38,608 - INFO - Starting Flask on port 5000
+2025-05-28 21:28:38,622 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-28 21:28:38,622 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-28 21:28:56,509 - INFO - Received request: message='what can you do', session_id='default'
+2025-05-28 21:28:57,025 - WARNING - DeepSeek API failed: 400 Client Error: Bad Request for url: https://api.deepseek.com/v1/chat/completions, falling back to local model
+2025-05-28 21:29:55,790 - INFO - Received request: message='what ai model are you', session_id='default'
+2025-05-28 21:29:56,096 - WARNING - DeepSeek API failed: 400 Client Error: Bad Request for url: https://api.deepseek.com/v1/chat/completions, falling back to local model
+2025-05-28 21:30:19,976 - INFO - 127.0.0.1 - - [28/May/2025 21:30:19] "POST /chat HTTP/1.1" 200 -
+2025-05-28 21:30:30,012 - INFO - 127.0.0.1 - - [28/May/2025 21:30:30] "POST /chat HTTP/1.1" 200 -
+2025-05-28 21:40:13,084 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-05-28 21:41:23,007 - INFO - Loaded DistilBERT for intent classification
+2025-05-28 21:41:28,872 - INFO - Starting Flask on port 5000
+2025-05-28 21:41:28,997 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-28 21:41:28,997 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-28 21:44:50,629 - INFO - Received request: message='what can you do', session_id='default'
+2025-05-28 21:44:50,837 - INFO - 127.0.0.1 - - [28/May/2025 21:44:50] "POST /chat HTTP/1.1" 200 -
+2025-05-28 21:44:57,146 - INFO - Received request: message='what', session_id='default'
+2025-05-28 21:44:57,236 - INFO - 127.0.0.1 - - [28/May/2025 21:44:57] "POST /chat HTTP/1.1" 200 -
+2025-05-29 19:08:09,380 - INFO - Loaded DistilBERT for intent classification
+2025-05-29 19:08:46,548 - INFO - Starting Flask on port 5000
+2025-05-29 19:08:47,144 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.43.65:5000
+2025-05-29 19:08:47,144 - INFO - [33mPress CTRL+C to quit[0m
