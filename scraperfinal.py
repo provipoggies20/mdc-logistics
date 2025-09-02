@@ -160,13 +160,42 @@ def is_connection_active(connection):
         print_message(f"Database connection check failed: {e}")
         return False
 
+def scroll_and_scrape(driver, xpath, wait_time=2):
+    """
+    Scroll through the page to load all elements matching the given XPath.
+    Returns a list of elements found.
+    """
+    try:
+        elements = []
+        last_height = driver.execute_script("return document.body.scrollHeight")
+        while True:
+            # Find all elements matching the XPath in the current viewport
+            current_elements = driver.find_elements(By.XPATH, xpath)
+            elements.extend(current_elements)
+            # Scroll down to the bottom of the page
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(wait_time)  # Wait for content to load
+            # Check if new content has loaded
+            new_height = driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:
+                break  # Exit if no new content is loaded
+            last_height = new_height
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_elements = [e for e in elements if not (e.id in seen or seen.add(e.id))]
+        print_message(f"Found {len(unique_elements)} unique elements after scrolling.")
+        return unique_elements
+    except Exception as e:
+        print_message(f"Error during scrolling and scraping: {e}")
+        raise    
+
 # Function to initialize the WebDriver
 def initialize_driver():
     chrome_options = Options()
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument("--headless")
+    #chrome_options.add_argument("--headless")
     
     # Detect OS and architecture
     os_type = platform.system().lower()
@@ -706,7 +735,8 @@ def scrape_models_komtrax(driver):
     try:
         print_message("Scraping Komtrax Model.")
         time.sleep(10)
-        model_elements = driver.find_elements(By.XPATH, "//div[contains(@class, 'SideList_Item')]//a[contains(@class, 'SideList_ItemLink')]//div[contains(@class, 'SideList_ItemTexts')]//div[contains(@class, 'SideList_ItemText1')]")
+        # Use scrolling to ensure all model elements are loaded
+        model_elements = scroll_and_scrape(driver, "//div[contains(@class, 'SideList_Item')]//a[contains(@class, 'SideList_ItemLink')]//div[contains(@class, 'SideList_ItemText1')]")
         for model_element in model_elements:
             model_info = model_element.text.strip()
             if model_info and model_info != "-":
@@ -723,7 +753,8 @@ def scrape_locations_and_coordinates_komtrax(driver):
     try:
         print_message("Scraping Komtrax Model location and coordinates.")
         time.sleep(10)
-        items = driver.find_elements(By.XPATH, "//div[contains(@class, 'DataTable_Item')]")
+        # Scroll to load all DataTable items
+        items = scroll_and_scrape(driver, "//div[contains(@class, 'DataTable_Item')]")
         for item in items:
             location_elements = item.find_elements(By.XPATH, ".//div[contains(@class, 'DataTable_ValueText')]")
             if len(location_elements) > 15:
@@ -747,7 +778,8 @@ def scrape_conversion_komtrax(driver):
         driver.refresh()
         print_message("Refreshed Komtrax page for conversion datetime scraping.")
         time.sleep(2)
-        conversion_elements = driver.find_elements(By.XPATH, "//div[contains(@class, 'DataTable_Cell')]//div[contains(@class, 'DateTime')]")
+        # Scroll to load all datetime elements
+        conversion_elements = scroll_and_scrape(driver, "//div[contains(@class, 'DataTable_Cell')]//div[contains(@class, 'DateTime')]")
         print_message(f"Found {len(conversion_elements)} conversion datetime elements.")
         for conversion_element in conversion_elements:
             conversion_info = conversion_element.text.strip()
@@ -939,7 +971,7 @@ def haversine(coord1, coord2):
     return R * c
 
 # Function to check if within geofence
-def is_within_geofence(device_location, geofence_coordinates, radius=5):
+def is_within_geofence(device_location, geofence_coordinates, radius=10):
     distance = haversine(device_location, geofence_coordinates)
     return distance <= radius
 
@@ -1014,7 +1046,7 @@ def main(driver_komtrax, driver_aika, connection):
     AIKA_URL = 'https://en.aika168.com/index.aspx'
     # Credentials
     EMAIL_USER = 'maxiprodc.gps1@gmail.com'
-    EMAIL_PASS = 'bqnk vcfm oszm aggm'
+    EMAIL_PASS = 'gtkm oeip sggd uduj'
     try:
         # Ensure database connection is active
         if not is_connection_active(connection):
@@ -1134,71 +1166,74 @@ def main(driver_komtrax, driver_aika, connection):
                             pass
                     driver_aika = initialize_driver()
                 continue
-            # Geofence Processing
-            try:
-                devices_from_devices = get_devices_from_table(connection, 'devices')
-                devices_from_komtrax = get_devices_from_table(connection, 'komtrax')
-                all_devices = list(devices_from_devices) + list(devices_from_komtrax)
-                print_message(f"Retrieved {len(devices_from_devices)} devices from devices table.")
-                print_message(f"Retrieved {len(devices_from_komtrax)} devices from komtrax table.")
-                print_message(f"Total devices to process for geofencing: {len(all_devices)}")
-                for target_name, address, latitude, longitude, assignment, equipment_type in all_devices:
-                    if equipment_type == "GPS Tracker":
-                        print_message(f"Skipping device {target_name} because it is a GPS Tracker.")
-                        continue
-                    if not assignment:
-                        print_message(f"Skipping device {target_name} due to empty assignment.")
-                        continue
-                    print_message(f"Processing device: {target_name} with address: {address}, Assignment: {assignment}")
-                    device_location = get_device_location(latitude, longitude)
-                    normalized_assignment = assignment.strip().lower().replace(" ", "")
-                    matching_tables = find_matching_tables(connection, normalized_assignment)
-                    print_message(f"Found matching tables for assignment '{assignment}': {matching_tables}")
-                    if matching_tables:
-                        notification_deleted = False
-                        for table_name in matching_tables:
-                            print_message(f"Accessing table: {table_name}")
-                            try:
-                                coordinates_data = get_coordinates_and_site_from_table(connection, table_name)
-                                if coordinates_data:
-                                    print_message(f"Retrieved coordinates from {table_name}: {coordinates_data}")
-                                    for coord in coordinates_data:
-                                        if notification_deleted:
-                                            break
-                                        try:
-                                            lat, lon = map(float, coord[0].strip().split(','))
-                                            site = coord[1]
-                                        except ValueError:
-                                            print_message(f"Invalid coordinate format: {coord[0]}")
-                                            delete_notification(connection, target_name)
-                                            print_message(f"Deleted notification for {target_name} due to invalid coordinates.")
-                                            notification_deleted = True
-                                            break
-                                        geofence_coordinates = (lat, lon)
-                                        if is_within_geofence(device_location, geofence_coordinates):
-                                            if not notification_deleted:
-                                                delete_notification(connection, target_name)
-                                                notification_deleted = True
-                                                print_message(f"Deleted notification for {target_name} at {coord[1]}.")
+                # Geofence Processing
+                try:
+                    devices_from_devices = get_devices_from_table(connection, 'devices')
+                    devices_from_komtrax = get_devices_from_table(connection, 'komtrax')
+                    all_devices = list(devices_from_devices) + list(devices_from_komtrax)
+                    print_message(f"Retrieved {len(devices_from_devices)} devices from devices table.")
+                    print_message(f"Retrieved {len(devices_from_komtrax)} devices from komtrax table.")
+                    print_message(f"Total devices to process for geofencing: {len(all_devices)}")
+                    for target_name, address, latitude, longitude, assignment, equipment_type in all_devices:
+                        if equipment_type == "GPS Tracker":
+                            print_message(f"Skipping device {target_name} because it is a GPS Tracker.")
+                            continue
+                        if not assignment:
+                            print_message(f"Skipping device {target_name} due to empty assignment.")
+                            continue
+                        if assignment.lower() == "assignment_quirino":
+                            print_message(f"Skipping geofence check for {target_name} due to assignment_quirino.")
+                            continue
+                        print_message(f"Processing device: {target_name} with address: {address}, Assignment: {assignment}")
+                        device_location = get_device_location(latitude, longitude)
+                        normalized_assignment = assignment.strip().lower().replace(" ", "")
+                        matching_tables = find_matching_tables(connection, normalized_assignment)
+                        print_message(f"Found matching tables for assignment '{assignment}': {matching_tables}")
+                        if matching_tables:
+                            notification_deleted = False
+                            for table_name in matching_tables:
+                                print_message(f"Accessing table: {table_name}")
+                                try:
+                                    coordinates_data = get_coordinates_and_site_from_table(connection, table_name)
+                                    if coordinates_data:
+                                        print_message(f"Retrieved coordinates from {table_name}: {coordinates_data}")
+                                        for coord in coordinates_data:
+                                            if notification_deleted:
                                                 break
-                                        else:
-                                            status = f"Outside Geofence - {address}, Site: {site}"
-                                            insert_or_update_notification(connection, target_name, assignment, status)
-                                            if "Address not found" in address:
+                                            try:
+                                                lat, lon = map(float, coord[0].strip().split(','))
+                                                site = coord[1]
+                                            except ValueError:
+                                                print_message(f"Invalid coordinate format: {coord[0]}")
                                                 delete_notification(connection, target_name)
-                                                print_message(f"Deleted notification for {target_name} due to address not found.")
+                                                print_message(f"Deleted notification for {target_name} due to invalid coordinates.")
                                                 notification_deleted = True
                                                 break
-                                else:
-                                    print_message(f"No coordinates found for assignment table: {table_name}")
-                            except Error as e:
-                                print_message(f"Error accessing table {table_name}: {e}")
-                    else:
-                        print_message(f"No matching tables found for assignment: {assignment}")
-                if is_geofence_table_empty(connection):
-                    truncate_geofence_table(connection)
-            except Exception as e:
-                print_message(f"Error in geofencing: {e}")
+                                            geofence_coordinates = (lat, lon)
+                                            if is_within_geofence(device_location, geofence_coordinates):
+                                                if not notification_deleted:
+                                                    delete_notification(connection, target_name)
+                                                    notification_deleted = True
+                                                    print_message(f"Deleted notification for {target_name} at {coord[1]}.")
+                                                    break
+                                            else:
+                                                status = f"Outside Geofence - {address}, Site: {site}"
+                                                insert_or_update_notification(connection, target_name, assignment, status)
+                                                if "Address not found" in address:
+                                                    delete_notification(connection, target_name)
+                                                    print_message(f"Deleted notification for {target_name} due to address not found.")
+                                                    notification_deleted = True
+                                                    break
+                                    else:
+                                        print_message(f"No coordinates found for assignment table: {table_name}")
+                                except Error as e:
+                                    print_message(f"Error accessing table {table_name}: {e}")
+                        else:
+                            print_message(f"No matching tables found for assignment: {assignment}")
+                    if is_geofence_table_empty(connection):
+                        truncate_geofence_table(connection)
+                except Exception as e:
+                    print_message(f"Error in geofencing: {e}")
             current_time = datetime.now().strftime('%Y-%m-%d %I:%M:%S %p')
             elapsed_time = time.time() - start_time
             elapsed_time_str = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
