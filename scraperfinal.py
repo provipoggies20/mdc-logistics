@@ -460,7 +460,9 @@ def extract_city_state(address):
 def determine_equipment_type_aika(target_name):
     if not isinstance(target_name, str) or not target_name.strip():
         return "Not Specified Yet"
-    if "SLD" in target_name and "*" not in target_name:
+    if "SD - " in target_name and "*" not in target_name:
+        return "Vehicle/Equipment Sold"
+    elif "SLD" in target_name and "*" not in target_name:
         return "Selfloader"
     elif "BT" in target_name and "*" not in target_name:
         return "Boomtruck"
@@ -496,12 +498,12 @@ def determine_equipment_type_aika(target_name):
         return "Mini Road Roller"
     elif "ST" in target_name and "*" not in target_name:
         return "Saddam Truck"
-    elif "SD -" in target_name and "*" not in target_name:
-        return "Vehicle/Equipment Sold"
     elif "TH" in target_name and "*" not in target_name:
         return "Tractor Head"
     elif "MLT" in target_name and "*" not in target_name:
         return "Manlift"
+    elif "ET" in target_name and "*" not in target_name:
+        return "Elf Truck"
     elif "*" in target_name:
         return "GPS Device not Working"
     return "Not Specified Yet"
