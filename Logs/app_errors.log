@@ -1,0 +1,47 @@
+2025-06-11 08:16:12,002 - INFO - __main__ - Using device: cuda
+2025-06-11 08:16:12,010 - INFO - __main__ - GPU: NVIDIA GeForce RTX 3060
+2025-06-11 08:16:12,048 - INFO - __main__ - MySQL connection pool initialized
+2025-06-11 08:16:12,051 - DEBUG - urllib3.connectionpool - Starting new HTTPS connection (1): huggingface.co:443
+2025-06-11 08:16:43,584 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-11 08:16:49,379 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 307 146
+2025-06-11 08:16:49,657 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-11 08:16:51,186 - INFO - __main__ - DistilBERT intent classifier loaded
+2025-06-11 08:16:51,955 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-11 08:17:10,879 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/generation_config.json HTTP/1.1" 200 0
+2025-06-11 08:17:11,149 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/custom_generate/generate.py HTTP/1.1" 404 0
+2025-06-11 08:17:34,139 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/TinyLlama/TinyLlama-1.1B-Chat-v1.0/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-11 08:17:52,500 - INFO - __main__ - TinyLlama model loaded on GPU
+2025-06-11 08:17:52,509 - INFO - __main__ - Starting Flask on port 5000
+2025-06-11 08:17:52,542 - INFO - werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.31:5000
+2025-06-11 08:17:52,542 - INFO - werkzeug - [33mPress CTRL+C to quit[0m
+2025-06-13 08:30:08,250 - INFO - __main__ - Using device: cuda
+2025-06-13 08:30:08,264 - INFO - __main__ - GPU: NVIDIA GeForce RTX 3060
+2025-06-13 08:30:08,476 - INFO - __main__ - MySQL connection pool initialized
+2025-06-13 08:30:08,478 - DEBUG - urllib3.connectionpool - Starting new HTTPS connection (1): huggingface.co:443
+2025-06-13 08:30:09,453 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-13 08:30:11,038 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 307 146
+2025-06-13 08:30:11,302 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-13 08:30:13,227 - INFO - __main__ - DistilBERT intent classifier loaded
+2025-06-13 08:30:13,508 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-13 08:30:57,489 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/generation_config.json HTTP/1.1" 200 0
+2025-06-13 08:30:57,767 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/custom_generate/generate.py HTTP/1.1" 404 0
+2025-06-13 08:30:58,280 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/TinyLlama/TinyLlama-1.1B-Chat-v1.0/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-13 08:30:59,632 - INFO - __main__ - TinyLlama model loaded on GPU
+2025-06-13 08:30:59,977 - INFO - __main__ - Starting Flask on port 5000
+2025-06-13 08:31:00,003 - INFO - werkzeug - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.15:5000
+2025-06-13 08:31:00,004 - INFO - werkzeug - [33mPress CTRL+C to quit[0m
+2025-06-16 08:51:05,977 - INFO - __main__ - Using device: cuda
+2025-06-16 08:51:05,989 - INFO - __main__ - GPU: NVIDIA GeForce RTX 3060
+2025-06-16 08:51:06,130 - INFO - __main__ - MySQL connection pool initialized
+2025-06-16 08:51:06,132 - DEBUG - urllib3.connectionpool - Starting new HTTPS connection (1): huggingface.co:443
+2025-06-16 08:51:06,953 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /distilbert-base-uncased/resolve/main/config.json HTTP/1.1" 200 0
+2025-06-16 08:51:08,316 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 307 146
+2025-06-16 08:51:08,577 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "GET /api/models/distilbert/distilbert-base-uncased/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-06-16 08:51:10,225 - INFO - __main__ - DistilBERT intent classifier loaded
+2025-06-16 08:51:10,488 - DEBUG - urllib3.connectionpool - https://huggingface.co:443 "HEAD /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json HTTP/1.1" 200 0
